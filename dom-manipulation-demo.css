@@ -1,0 +1,7 @@
+ul li {
+  cursor: pointer;
+}
+
+.task-done {
+  text-decoration: line-through;
+}
