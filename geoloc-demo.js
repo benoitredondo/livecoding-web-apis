@@ -1,7 +1,15 @@
 const status = document.getElementById('geoloc-status');
 
 function onGeolocSuccess(position) {
-  status.innerHTML = `lat : ${position.coords.latitude}, lng : ${position.coords.longitude}`;
+  const lat = position.coords.latitude;
+  const lng = position.coords.longitude;
+  status.innerHTML = `lat : ${lat}, lng : ${lng}`;
+  const map = L.map('mapid').setView([lat, lng], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+  L.marker([lat, lng]).addTo(map).bindPopup('IM HERE :O').openPopup();
 }
 
 function onGeolocError(error) {
@@ -15,7 +23,7 @@ document.getElementById('geoloc-button').addEventListener('click', function () {
     status.textContent = 'Locating…';
     navigator.geolocation.getCurrentPosition(onGeolocSuccess, onGeolocError, {
       enableHighAccuracy: true,
-      timeout: 3 * 1000,
+      timeout: 5000,
     });
   }
 });
