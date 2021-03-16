@@ -8,6 +8,7 @@ taskFrom.addEventListener('submit', function (event) {
   taskItemElement.innerText = taskNameInput.value;
   taskItemElement.addEventListener('click', handleTaskClick);
   taskList.appendChild(taskItemElement);
+  taskNameInput.value = '';
 });
 
 function handleTaskClick(event) {
